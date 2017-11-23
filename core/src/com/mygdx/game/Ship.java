@@ -3,18 +3,16 @@ package com.mygdx.game;
 import java.util.ArrayList;
 
 public class Ship {
-	private int maxHP;
-	private int nowHP;
-	private int atk;
-	private int def;
-	private int minAttackingRange;
-	private int maxAttackingRange;
+	private int maxHP = 100;
+	private int nowHP = 100;
+	private int atk = 100;
+	private int def = 50;
+	private int minAttackingRange = 1;
+	private int maxAttackingRange = 1;
 	private Tile positionTile;
-	private int movingRange;
+	private int movingRange = 5;
 	private boolean canMoveNow=true;
 	private Player owner;
-	
-
 	
 	public Ship(Tile positionTile, Player owner) {
 		this.positionTile = positionTile;
@@ -22,11 +20,23 @@ public class Ship {
 	}
 	public ArrayList<Tile> showReachableTiles() {
 		ArrayList<Tile> reachableTiles = new ArrayList<Tile>();
-		//TODO 求可抵达的Tiles
-		return reachableTiles;
+		for(Tile t : Tile.tileArray) {
+			int distance =Math.abs(t.getPositionX()-this.getPositionTile().getPositionX())+Math.abs(t.getPositionY()-this.getPositionTile().getPositionY());
+			
+			if( distance > this.getMovingRange()) continue;//移动力可达
+			if( null != t.getShipAtThisTile()) continue;//无其他单位所在
+			if( false ) continue;//TODO 判断地形对船种的可达性.
+			
+			reachableTiles.add(t);
+		}
+		
+		return reachableTiles;//返回可达Tiles的ArrayList
 	}
 	public void moveTo(Tile goalTile) {
-		//TODO 移动至goalTile
+		//UNTESTED 移动至goalTile 
+		this.setPositionTile(goalTile);
+		goalTile.setShipAtThisTile(this);
+		
 	}
 	
 	public ArrayList<Ship> showAttackableShips() {
