@@ -87,7 +87,7 @@ public class DesktopLauncher {
 			System.out.println("ship4HP:"+ship4.getNowHP()+"enmHp:"+attackabletiles.get(0).getNowHP());
 			//回血成功。不会反击
 		*/	
-	
+
 	}
 }
 

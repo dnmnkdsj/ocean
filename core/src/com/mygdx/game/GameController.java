@@ -1,8 +1,10 @@
 package com.mygdx.game;
 
 public class GameController {
+	private Player[] players;
 	private Player nowPlayer;
 	private Player nextPlayer;
+	
 	
 	public void initGame() {//按Player,Tile,Ship的顺序进行初始化。及根据关卡设置，相互绑定。
 		this.initPlayers();
@@ -17,6 +19,8 @@ public class GameController {
 		Player player2 = new Player(10,10);
 		this.nowPlayer = player1;
 		this.nextPlayer = player2;	
+		this.players[1] = player1;
+		this.players[2] = player2;
 	}
 	public void initTiles() {
 		//TODO 初始化所有地图块。
@@ -66,13 +70,14 @@ public class GameController {
 		this.nextPlayer=nowPlayer;
 		 */
 	}
-	public boolean isEnd() {//如果nextPlayer的港口被占，则游戏结束
+	public boolean isEnd() {//返回布尔值.如果nextPlayer的港口被占则为true。
 		if(this.nextPlayer.getHarbourOfThisPlayer().getIsDestroyed())	return true;
 		else return false;
 	}
-	public void removeShip() {
-		//TODO Ship死亡后移除，并返还对方金钱
+	public void removeShip(Ship p) {//移除(死亡的)Ship，并结算给对方金钱
+		//TODO 
 	}
+
 	public Player getNowPlayer() {
 		return nowPlayer;
 	}

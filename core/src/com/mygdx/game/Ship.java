@@ -37,12 +37,13 @@ public class Ship {
 		this.setPositionTile(goalTile);
 		goalTile.setShipAtThisTile(this);
 		
-	}
+	}//移动之后控制攻击，静止，占领的操作由controller负责
 	
 	public ArrayList<Ship> showAttackableShips() {
 		ArrayList<Ship> attackableShips = new ArrayList<Ship>();
 		for(Tile t : Tile.tileArray) {//通过遍历Tile.tileArray来遍历所有Ship（qtmd解耦）
-			int distance =Math.abs(t.getPositionX()-this.getPositionTile().getPositionX())+Math.abs(t.getPositionY()-this.getPositionTile().getPositionY());
+			int distance =Math.abs(t.getPositionX()-this.getPositionTile().getPositionX())
+					+ Math.abs(t.getPositionY()-this.getPositionTile().getPositionY());
 			if( distance > this.getMaxAttackingRange() || distance < this.minAttackingRange) continue;//1.攻击范围内
 			if( null == t.getShipAtThisTile()) continue;//2.该tile上有船
 			if( this.getOwner() == t.getShipAtThisTile().getOwner()) continue;//3.是敌方船
@@ -54,8 +55,12 @@ public class Ship {
 
 	public void attack(Ship goalShip) {
 		goalShip.nowHP -= this.atk-goalShip.def;//TODO 计算公式待确认
-		//TODO 判定是否可反击:
-		if(true) goalShip.attackBack(this);
+		//判定反击:
+		int distance =Math.abs(goalShip.getPositionTile().getPositionX()-this.getPositionTile().getPositionX())
+				+ Math.abs(goalShip.getPositionTile().getPositionY()-this.getPositionTile().getPositionY());
+		if(distance > goalShip.getMaxAttackingRange() || distance < goalShip.minAttackingRange) {;}
+		else goalShip.attackBack(this);
+		
 	}
 	public void attackBack(Ship goalShip) {
 		goalShip.nowHP -= this.atk-goalShip.def;//TODO 计算公式待确认

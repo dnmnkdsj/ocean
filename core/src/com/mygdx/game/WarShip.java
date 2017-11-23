@@ -11,7 +11,10 @@ public class WarShip extends Ship {
 		this.setMinAttackingRange ( 1 );
 		this.setMaxAttackingRange ( 4 );//for testing
 		this.setMovingRange ( 10 );
-
 	}
-	
+
+	public void destroyedHarbour(Harbour h) {
+		h.setIsDestroyed(true);
+	}
+
 }

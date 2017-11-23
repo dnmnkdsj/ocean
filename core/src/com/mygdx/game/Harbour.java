@@ -16,7 +16,11 @@ public class Harbour extends Tile {
 	
 	public ArrayList<Tile> showAvailiableTilesForGenerating(){
 		ArrayList<Tile> availiableTilesForGenerating = new ArrayList<Tile>();
-		//TODO 求可生产Ship的Tiles
+		for(Tile t : Tile.tileArray) {
+			int distance = Math.abs(t.getPositionX()-this.getPositionX())
+					+ Math.abs(t.getPositionY()-this.getPositionY());			
+			if  ( 1 == distance ) availiableTilesForGenerating.add(t);
+		}
 		return availiableTilesForGenerating ;
 	}
 	
@@ -24,9 +28,6 @@ public class Harbour extends Tile {
 		//TODO 在goalTile处生成Ship
 	}
 	
-	public void destroyedBy(Ship ship) {
-		//TODO 判定ship可否摧毁Harbour.若能,则摧毁
-	}
 
 	public boolean getIsDestroyed() {
 		return isDestroyed;

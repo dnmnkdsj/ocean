@@ -10,10 +10,10 @@ public class Island extends Tile {
 		super(positionX, positionY);
 	}
 	
-	public void occupiedBy(Ship ship) {
-		//TODO 被参数ship的owner占领
-	}
+
 	public void generateAssests() {
-		//TODO 为this.owner生产money,population
+		this.owner.setMoney(this.owner.getMoney()+5);
+		this.owner.setPopulation(this.owner.getPopulation()+5);
+		//TODO 数值待定
 	}
 }
