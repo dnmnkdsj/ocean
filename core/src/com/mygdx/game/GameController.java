@@ -4,11 +4,12 @@ public class GameController {
 	private Player nowPlayer;
 	private Player nextPlayer;
 	
-	public void initGame() {
-		//TODO 按Player,Tile,Ship的顺序进行初始化。及相互绑定，
+	public void initGame() {//按Player,Tile,Ship的顺序进行初始化。及根据关卡设置，相互绑定。
 		this.initPlayers();
+		//TODO 按照关卡，设置具体的整张地图，生成双方对应的Ships
 		this.initTiles();
 		this.initShips();
+				
 	}
 	public void initPlayers() {
 		// 初始化双方玩家
@@ -48,13 +49,13 @@ public class GameController {
 			this.nowPlayer.shipBatch.add(ship2);
 			Tile.tileArray.get(1).setShipAtThisTile(ship2);
 			
-			Ship ship3 = new Submarine(Tile.tileArray.get(2),this.nowPlayer);
-			this.nowPlayer.shipBatch.add(ship3);
+			Ship ship3 = new Submarine(Tile.tileArray.get(2),this.nextPlayer);
+			this.nextPlayer.shipBatch.add(ship3);
 			Tile.tileArray.get(2).setShipAtThisTile(ship3);
 
-			Ship ship4 = new SupplyingShip(Tile.tileArray.get(3),this.nowPlayer);
-			this.nowPlayer.shipBatch.add(ship3);
-			Tile.tileArray.get(3).setShipAtThisTile(ship3);
+			Ship ship4 = new SupplyingShip(Tile.tileArray.get(3),this.nextPlayer);
+			this.nextPlayer.shipBatch.add(ship4);
+			Tile.tileArray.get(3).setShipAtThisTile(ship4);
 		
 	}
 	public void switchPlayer() {

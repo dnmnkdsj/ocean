@@ -3,14 +3,15 @@ package com.mygdx.game;
 import java.util.ArrayList;
 
 public class Ship {
-	private int maxHP = 100;
-	private int nowHP = 100;
-	private int atk = 100;
-	private int def = 50;
-	private int minAttackingRange = 1;
-	private int maxAttackingRange = 1;
+	protected int maxHP = 100;
+	protected int nowHP = 100;
+	protected int atk = 100;
+	protected int def = 50;
+	protected int minAttackingRange = 1;
+	protected int maxAttackingRange = 5;//for testing
+	protected int movingRange = 5;
+	
 	private Tile positionTile;
-	private int movingRange = 5;
 	private boolean canMoveNow=true;
 	private Player owner;
 	
@@ -18,22 +19,21 @@ public class Ship {
 		this.positionTile = positionTile;
 		this.owner = owner;
 	}
-	public ArrayList<Tile> showReachableTiles() {
+	public ArrayList<Tile> showReachableTiles() {//计算可达的Tiles
 		ArrayList<Tile> reachableTiles = new ArrayList<Tile>();
 		for(Tile t : Tile.tileArray) {
 			int distance =Math.abs(t.getPositionX()-this.getPositionTile().getPositionX())+Math.abs(t.getPositionY()-this.getPositionTile().getPositionY());
 			
-			if( distance > this.getMovingRange()) continue;//移动力可达
-			if( null != t.getShipAtThisTile()) continue;//无其他单位所在
-			if( false ) continue;//TODO 判断地形对船种的可达性.
+			if( distance > this.getMovingRange()) continue;//1.移动力可达
+			if( null != t.getShipAtThisTile()) continue;//2.无其他单位所在
+			if( false ) continue;//TODO 3.判断地形对船种的可达性.
 			
 			reachableTiles.add(t);
 		}
 		
 		return reachableTiles;//返回可达Tiles的ArrayList
 	}
-	public void moveTo(Tile goalTile) {
-		//UNTESTED 移动至goalTile 
+	public void moveTo(Tile goalTile) {//移动至goalTile 
 		this.setPositionTile(goalTile);
 		goalTile.setShipAtThisTile(this);
 		
@@ -41,7 +41,14 @@ public class Ship {
 	
 	public ArrayList<Ship> showAttackableShips() {
 		ArrayList<Ship> attackableShips = new ArrayList<Ship>();
-		//TODO 求可攻击的Ships
+		for(Tile t : Tile.tileArray) {//通过遍历Tile.tileArray来遍历所有Ship（qtmd解耦）
+			int distance =Math.abs(t.getPositionX()-this.getPositionTile().getPositionX())+Math.abs(t.getPositionY()-this.getPositionTile().getPositionY());
+			if( distance > this.getMaxAttackingRange() || distance < this.minAttackingRange) continue;//1.攻击范围内
+			if( null == t.getShipAtThisTile()) continue;//2.该tile上有船
+			if( this.getOwner() == t.getShipAtThisTile().getOwner()) continue;//3.是敌方船
+			
+			attackableShips.add(t.getShipAtThisTile());
+		}
 		return attackableShips ;
 	}
 
