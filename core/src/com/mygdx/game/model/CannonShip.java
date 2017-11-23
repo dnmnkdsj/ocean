@@ -6,14 +6,14 @@ public class CannonShip extends Ship {
 	private int nowHP = 100;
 	private int atk = 100;
 	private int def = 50;
-	private int minAttackingRange = 3;
-	private int maxAttackingRange = 4;
-	private int movingRange = 5;
-	private boolean canMoveNow=true;
+	private int min_atk_range = 3;
+	private int max_atk_range = 4;
+	private int moving_range = 5;
+	private boolean moveable=true;
 
 	
-	public CannonShip(Tile positionTile, Player owner) {
-		super(positionTile, owner);
+	public CannonShip(Tile position, Player owner) {
+		super(position, owner);
 	}
 
 	

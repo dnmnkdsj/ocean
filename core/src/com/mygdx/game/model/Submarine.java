@@ -5,19 +5,19 @@ public class Submarine extends Ship {
 	private int nowHP = 100;
 	private int atk = 100;
 	private int def = 50;
-	private int minAttackingRange = 1;
-	private int maxAttackingRange = 1;
-	private int movingRange = 5;
-	private boolean canMoveNow=true;
+	private int min_atk_range = 1;
+	private int max_atk_range = 1;
+	private int moving_range = 5;
+	private boolean moveable=true;
 	
-	public Submarine(Tile positionTile, Player owner) {
-		super(positionTile, owner);
+	public Submarine(Tile position, Player owner) {
+		super(position, owner);
 	}
 	
 	@Override
-	public void attack(Ship goalShip) {
+	public void attack(Ship goal) {
 		//重写。攻击后暴露，防御降低
-		super.attack(goalShip);
+		super.attack(goal);
 		this.setDef(this.getDef()-100);//TODO 值待定
 	}
 }

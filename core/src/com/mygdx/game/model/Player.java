@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Player {
 	private int money;
 	private int population;
-	private Harbour harbourOfThisPlayer;
-	ArrayList<Ship> shipBatch = new ArrayList<Ship>();
+	private Harbour harbour;
+	ArrayList<Ship> ship_batch = new ArrayList<Ship>();
 	
 	public Player(int money, int population) {
 		this.money = money;
@@ -22,10 +22,10 @@ public class Player {
 
 	//setter&getter
 	public Harbour getHarbourOfThisPlayer() {
-		return harbourOfThisPlayer;
+		return harbour;
 	}
-	public void setHarbourOfThisPlayer(Harbour harbourOfThisPlayer) {
-		this.harbourOfThisPlayer = harbourOfThisPlayer;
+	public void setHarbourOfThisPlayer(Harbour harbour) {
+		this.harbour = harbour;
 	}
 
 	public int getMoney() {
@@ -45,11 +45,11 @@ public class Player {
 	}
 
 	public ArrayList<Ship> getShipBatch() {
-		return shipBatch;
+		return ship_batch;
 	}
 
-	public void setShipBatch(ArrayList<Ship> shipBatch) {
-		this.shipBatch = shipBatch;
+	public void setShipBatch(ArrayList<Ship> ship_batch) {
+		this.ship_batch = ship_batch;
 	}
 
 

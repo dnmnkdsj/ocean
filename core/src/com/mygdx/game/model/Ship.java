@@ -7,21 +7,21 @@ public class Ship {
 	protected int nowHP = 100;
 	protected int atk = 100;
 	protected int def = 50;
-	protected int minAttackingRange = 1;
-	protected int maxAttackingRange = 5;//for testing
-	protected int movingRange = 5;
-	
-	private Tile positionTile;
-	private boolean canMoveNow=true;
+	protected int min_atk_range = 1;
+	protected int max_atk_range = 5;//for testing
+	protected int moving_range = 5;
+
+	private Tile position;
+	private boolean moveable=true;
 	private Player owner;
 	
-	public Ship(Tile positionTile, Player owner) {
-		this.positionTile = positionTile;
+	public Ship(Tile position, Player owner) {
+		this.position = position;
 		this.owner = owner;
 	}
 	public ArrayList<Tile> showReachableTiles() {//计算可达的Tiles
 		ArrayList<Tile> reachableTiles = new ArrayList<Tile>();
-		for(Tile t : Tile.tileArray) {
+		for(Tile t : Board.getTiles()) {
 			int distance =Math.abs(t.getPositionX()-this.getPositionTile().getPositionX())+Math.abs(t.getPositionY()-this.getPositionTile().getPositionY());
 			
 			if( distance > this.getMovingRange()) continue;//1.移动力可达
@@ -38,13 +38,15 @@ public class Ship {
 		goalTile.setShipAtThisTile(this);
 		
 	}//移动之后控制攻击，静止，占领的操作由controller负责
-	
+
+
+	//show all enemy's ships reachable
 	public ArrayList<Ship> showAttackableShips() {
 		ArrayList<Ship> attackableShips = new ArrayList<Ship>();
-		for(Tile t : Tile.tileArray) {//通过遍历Tile.tileArray来遍历所有Ship（qtmd解耦）
+		for(Tile t : Board.getTiles()) {//通过遍历Tile.tileArray来遍历所有Ship（qtmd解耦）
 			int distance =Math.abs(t.getPositionX()-this.getPositionTile().getPositionX())
 					+ Math.abs(t.getPositionY()-this.getPositionTile().getPositionY());
-			if( distance > this.getMaxAttackingRange() || distance < this.minAttackingRange) continue;//1.攻击范围内
+			if( distance > this.getMaxAttackingRange() || distance < this.min_atk_range) continue;//1.攻击范围内
 			if( null == t.getShipAtThisTile()) continue;//2.该tile上有船
 			if( this.getOwner() == t.getShipAtThisTile().getOwner()) continue;//3.是敌方船
 			
@@ -58,7 +60,7 @@ public class Ship {
 		//判定反击:
 		int distance =Math.abs(goalShip.getPositionTile().getPositionX()-this.getPositionTile().getPositionX())
 				+ Math.abs(goalShip.getPositionTile().getPositionY()-this.getPositionTile().getPositionY());
-		if(distance > goalShip.getMaxAttackingRange() || distance < goalShip.minAttackingRange) {;}
+		if(distance > goalShip.getMaxAttackingRange() || distance < goalShip.min_atk_range) {;}
 		else goalShip.attackBack(this);
 		
 	}
@@ -92,34 +94,34 @@ public class Ship {
 		this.def = def;
 	}
 	public int getMinAttackingRange() {
-		return minAttackingRange;
+		return min_atk_range;
 	}
-	public void setMinAttackingRange(int minAttackingRange) {
-		this.minAttackingRange = minAttackingRange;
+	public void setMinAttackingRange(int min_atk_range) {
+		this.min_atk_range = min_atk_range;
 	}
 	public int getMaxAttackingRange() {
-		return maxAttackingRange;
+		return max_atk_range;
 	}
-	public void setMaxAttackingRange(int maxAttackingRange) {
-		this.maxAttackingRange = maxAttackingRange;
+	public void setMaxAttackingRange(int max_atk_range) {
+		this.max_atk_range = max_atk_range;
 	}
 	public Tile getPositionTile() {
-		return positionTile;
+		return position;
 	}
-	public void setPositionTile(Tile positionTile) {
-		this.positionTile = positionTile;
+	public void setPositionTile(Tile position) {
+		this.position = position;
 	}
 	public int getMovingRange() {
-		return movingRange;
+		return moving_range;
 	}
-	public void setMovingRange(int movingRange) {
-		this.movingRange = movingRange;
+	public void setMovingRange(int moving_range) {
+		this.moving_range = moving_range;
 	}
-	public boolean isCanMoveNow() {
-		return canMoveNow;
+	public boolean isMoveable() {
+		return moveable;
 	}
-	public void setCanMoveNow(boolean canMoveNow) {
-		this.canMoveNow = canMoveNow;
+	public void setMoveable(boolean moveable) {
+		this.moveable = moveable;
 	}
 	public Player getOwner() {
 		return owner;

@@ -2,8 +2,8 @@ package com.mygdx.game.model;
 
 public class WarShip extends Ship {
 
-	public WarShip(Tile positionTile, Player owner) {
-		super(positionTile, owner);
+	public WarShip(Tile position, Player owner) {
+		super(position, owner);
 		this.setMaxHP(100);
 		this.setNowHP(100);
 		this.setAtk(100);

@@ -3,7 +3,6 @@ package com.mygdx.game.model;
 import java.util.ArrayList;
 
 public class Tile {
-	static public ArrayList<Tile> tileArray = new ArrayList<Tile>();
 	private int positionX;
 	private int positionY;
 	private Ship shipAtThisTile;
