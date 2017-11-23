@@ -3,7 +3,16 @@ package com.mygdx.game;
 import java.util.ArrayList;
 
 public class Harbour extends Tile {
-	private boolean isDestroyed;
+
+	private boolean isDestroyed = false;
+	
+	public Harbour(int positionX, int positionY, Ship shipAtThisTile) {
+		super(positionX, positionY, shipAtThisTile);
+	}
+	public Harbour(int positionX, int positionY) {
+		super(positionX, positionY);
+	}
+	
 	
 	public ArrayList<Tile> showAvailiableTilesForGenerating(){
 		ArrayList<Tile> availiableTilesForGenerating = new ArrayList<Tile>();

@@ -8,6 +8,11 @@ public class Player {
 	private Harbour harbourOfThisPlayer;
 	ArrayList<Ship> shipBatch;
 	
+	public Player(int money, int population) {
+		this.money = money;
+		this.population = population;
+	}
+	
 	void acquireMoney(int n) {
 		this.money += n ; 
 	}

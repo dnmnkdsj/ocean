@@ -11,9 +11,15 @@ public class Ship {
 	private int maxAttackingRange;
 	private Tile positionTile;
 	private int movingRange;
-	private boolean canMoveNow;
+	private boolean canMoveNow=true;
 	private Player owner;
 	
+
+	
+	public Ship(Tile positionTile, Player owner) {
+		this.positionTile = positionTile;
+		this.owner = owner;
+	}
 	public ArrayList<Tile> showReachableTiles() {
 		ArrayList<Tile> reachableTiles = new ArrayList<Tile>();
 		//TODO 求可抵达的Tiles
