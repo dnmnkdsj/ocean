@@ -29,7 +29,13 @@ public class SupplyingShip extends Ship {
 		}
 		return attackableShips ;
 				
-	}//而且不出发反击？
+	}
+	//而且不触发反击
+
+	@Override
+	public void attack(Ship goalShip) {
+		goalShip.nowHP += this.atk;//TODO 计算公式待确认
+	}
 	
 	
 }

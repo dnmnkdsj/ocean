@@ -17,9 +17,13 @@ public class DesktopLauncher {
 	
 		//TEST:
 		
-		//初始化
+		//初始化(测试版
 			GameController testGameController = new GameController();
 			testGameController.initGame();
+			Ship ship1 = testGameController.getNowPlayer().getShipBatch().get(0);//nowPlayer Warship
+			Ship ship2 = testGameController.getNowPlayer().getShipBatch().get(1);//nowPlayer CannonShip
+			Ship ship3 = testGameController.getNextPlayer().getShipBatch().get(0);//nextPlayer Submarine
+			Ship ship4 = testGameController.getNextPlayer().getShipBatch().get(1);//nextPlayer SupplyingShip
 		
 		/*
 			//测试打印所有Tile
@@ -31,52 +35,59 @@ public class DesktopLauncher {
 		
 		/*
 			//测试打印nowPlayer的所有Ship
-			for (Ship s : testGameController.getNowPlayer().getShipBatch()) {
-				System.out.print("shipType:"+s.getClass()+"  ");
-			}
+
+			System.out.print("shipType:"+ship1.getClass()+"  ");
+			System.out.print("shipType:"+ship2.getClass()+"  ");
+			System.out.print("shipType:"+ship3.getClass()+"  ");
+			System.out.print("shipType:"+ship4.getClass()+"  ");			
 			System.out.println();
 		 */
 		
 		/*
-			//获取可达Tiles
-			ArrayList<Tile> reachabletiles = 
-					testGameController.getNowPlayer().getShipBatch().get(0).showReachableTiles();//此处以nowPlayer的第一条船为例
+			//获取可达Tiles,此处以ship1为例
+			ArrayList<Tile> reachabletiles = ship1.showReachableTiles();
 			for(Tile t : reachabletiles) {
 				System.out.println(t.getPositionX());
 			}
 		
 			//移动至可达Tile
 			Tile goalTile = reachabletiles.get(0);
-			System.out.println("position before moving:"+
-			testGameController.getNowPlayer().getShipBatch().get(0).getPositionTile().getPositionX()
+			System.out.println("position before moving:" + ship1.getPositionTile().getPositionX()
 			);
 			System.out.println("Now the ship at goalTile is :"+goalTile.getShipAtThisTile());
-			testGameController.getNowPlayer().getShipBatch().get(0).moveTo(goalTile);//此处以可达Array中的第一个位置为测试用例
+			ship1.moveTo(goalTile);//此处以可达Array中的第一个位置为测试用例
 			
-			System.out.println("position after moving:"+
-			testGameController.getNowPlayer().getShipBatch().get(0).getPositionTile().getPositionX()
+			System.out.println("position after moving:" + ship1.getPositionTile().getPositionX()
 			);
 			System.out.println("Now the ship at goalTile is :"+goalTile.getShipAtThisTile());
 		
 		*/
 		/*
-			//获取可攻击到的Ships
-				//奶船
-			ArrayList<Ship> attackabletiles = 
-					testGameController.getNextPlayer().getShipBatch().get(1).showAttackableShips();
-			for(Ship s : attackabletiles ) {
-				System.out.println(s.getPositionTile().getPositionX());
-			}
-			 	//普通船
-			attackabletiles = 
-					testGameController.getNowPlayer().getShipBatch().get(1).showAttackableShips();
-			for(Ship s : attackabletiles ) {
-				System.out.println(s.getPositionTile().getPositionX());
-			}
-		
-		*/
+			//(普通船)获取可攻击到的Ships
 			
+			ArrayList<Ship>	attackabletiles = ship2.showAttackableShips();
+			for(Ship s : attackabletiles ) {
+				System.out.println(s.getPositionTile().getPositionX());
+			}
 			//攻击
+			System.out.println("ship2HP:"+ship2.getNowHP()+"enmHp:"+attackabletiles.get(0).getNowHP());
+			ship2.attack(attackabletiles.get(0));//以能攻击到的第一条船为例
+			System.out.println("ship2HP:"+ship2.getNowHP()+"enmHp:"+attackabletiles.get(0).getNowHP());
+			//攻击成功。反击成功
+		*/
+		/*
+			//(奶船)获取可攻击到的Ships
+			ArrayList<Ship> attackabletiles = ship4.showAttackableShips();
+			for(Ship s : attackabletiles ) {
+				System.out.println(s.getPositionTile().getPositionX());
+			}
+			//攻击
+			System.out.println("ship4HP:"+ship4.getNowHP()+"enmHp:"+attackabletiles.get(0).getNowHP());
+			ship4.attack(attackabletiles.get(0));//以能攻击到的第一条船为例
+			System.out.println("ship4HP:"+ship4.getNowHP()+"enmHp:"+attackabletiles.get(0).getNowHP());
+			//回血成功。不会反击
+		*/	
+	
 	}
 }
 
