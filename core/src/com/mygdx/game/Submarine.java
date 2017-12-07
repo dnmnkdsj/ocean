@@ -1,17 +1,16 @@
 package com.mygdx.game;
 
 public class Submarine extends Ship {
-	private int maxHP = 100;
-	private int nowHP = 100;
-	private int atk = 100;
-	private int def = 50;
-	private int minAttackingRange = 1;
-	private int maxAttackingRange = 1;
-	private int movingRange = 5;
-	private boolean canMoveNow=true;
 	
 	public Submarine(Tile positionTile, Player owner) {
 		super(positionTile, owner);
+		this.maxHP = 100;
+		this.nowHP = 100;
+		this.atk = 100;
+		this.def = 50;
+		this.minAttackingRange = 3;
+		this.maxAttackingRange = 4;
+		this.movingRange = 5;
 	}
 	
 	@Override

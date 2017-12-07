@@ -9,32 +9,22 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Ocean extends ApplicationAdapter {
 	ShipPainting shipPainting;
-//	SpriteBatch batch;
-//	Texture img;
+	Test test;
 
 	@Override
 	public void create () {
-//		batch = new SpriteBatch();
-//		img = new Texture("CannonShip.png");
 		shipPainting = new ShipPainting(this);
+		test = new Test(this);
 	}
 
 	@Override
 	public void render () {
-//		Gdx.gl.glClearColor( 0.5f, 0, 0, 1);
-//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//		batch.begin();
-//		batch.draw(img, 0, 0);
-//		batch.end();
 		shipPainting.paint();
 	}
 
 	@Override
 	public void dispose () {
-//		batch.dispose();
-//		img.dispose();
 		shipPainting.dispose();
 	}
-
 
 }

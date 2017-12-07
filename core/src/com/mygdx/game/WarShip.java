@@ -4,14 +4,15 @@ public class WarShip extends Ship {
 
 	public WarShip(Tile positionTile, Player owner) {
 		super(positionTile, owner);
-		this.setMaxHP(100);
-		this.setNowHP(100);
-		this.setAtk(100);
-		this.setDef(50);
-		this.setMinAttackingRange ( 1 );
-		this.setMaxAttackingRange ( 4 );//for testing
-		this.setMovingRange ( 10 );
+		this.maxHP = 100;
+		this.nowHP = 100;
+		this.atk = 100;
+		this.def = 50;
+		this.minAttackingRange = 3;
+		this.maxAttackingRange = 4;
+		this.movingRange = 5;
 	}
+	//constructor cannot be inherited.use super()
 
 	public void destroyedHarbour(Harbour h) {
 		h.setIsDestroyed(true);

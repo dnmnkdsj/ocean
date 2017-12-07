@@ -3,13 +3,14 @@ package com.mygdx.game;
 import java.util.ArrayList;
 
 public class Ship {
-	protected int maxHP = 100;
-	protected int nowHP = 100;
-	protected int atk = 100;
-	protected int def = 50;
-	protected int minAttackingRange = 1;
-	protected int maxAttackingRange = 5;//for testing
-	protected int movingRange = 5;
+	int maxHP = 100;
+	int nowHP = 100;
+	int atk = 100;
+	int def = 50;
+	int minAttackingRange = 1;
+	int maxAttackingRange = 5;//for testing
+	int movingRange = 5;
+	//default attributes can be visited in son classes
 	
 	private Tile positionTile;
 	private boolean canMoveNow=true;

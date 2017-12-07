@@ -2,18 +2,16 @@ package com.mygdx.game;
 
 public class CannonShip extends Ship {
 
-	private int maxHP = 100;
-	private int nowHP = 100;
-	private int atk = 100;
-	private int def = 50;
-	private int minAttackingRange = 3;
-	private int maxAttackingRange = 4;
-	private int movingRange = 5;
-	private boolean canMoveNow=true;
-
 	
 	public CannonShip(Tile positionTile, Player owner) {
 		super(positionTile, owner);
+		this.maxHP = 100;
+		this.nowHP = 100;
+		this.atk = 100;
+		this.def = 50;
+		this.minAttackingRange = 3;
+		this.maxAttackingRange = 4;
+		this.movingRange = 5;
 	}
 
 	
