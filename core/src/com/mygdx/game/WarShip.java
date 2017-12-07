@@ -11,6 +11,7 @@ public class WarShip extends Ship {
 		this.minAttackingRange = 3;
 		this.maxAttackingRange = 4;
 		this.movingRange = 5;
+		this.type = Type.WARSHIP;
 	}
 	//constructor cannot be inherited.use super()
 

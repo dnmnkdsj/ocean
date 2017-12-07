@@ -12,6 +12,7 @@ public class CannonShip extends Ship {
 		this.minAttackingRange = 3;
 		this.maxAttackingRange = 4;
 		this.movingRange = 5;
+		this.type = Type.CANONNSHIP;
 	}
 
 	

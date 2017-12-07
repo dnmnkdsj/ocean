@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class ShipPainting {
     static Ocean ocean;
     static ArrayList<Ship> ships;
+    ArrayList<Sprite> sprites;
 
     static private Texture WarShipImg = new Texture("WarShip.png");
     static private Texture CanonShipImg = new Texture("CannonShip.png");
@@ -22,17 +23,18 @@ public class ShipPainting {
         this.ocean = ocean;
         //initialize ships from ocean
         this.batch = new SpriteBatch();
+        Test();//test code
+        this.sprites = createSprites();
     }
 
 
     void paint() {
-        Gdx.gl.glClearColor(0.5f, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(WarShipImg, 0, 0);
-        batch.draw(CanonShipImg, 30, 0);
-        batch.draw(SubmarineImg, 60, 0);
-        batch.draw(SupplyingShipImg, 100, 0);
+        for (Sprite sprite : this.sprites) {
+            sprite.draw(batch);
+        }
         batch.end();
     }
 
@@ -42,5 +44,55 @@ public class ShipPainting {
         CanonShipImg.dispose();
         SubmarineImg.dispose();
         SubmarineImg.dispose();
+    }
+
+    //create a sprite for each ship and store them into ArrayList
+    ArrayList<Sprite> createSprites() {
+        ArrayList<Sprite> ret = new ArrayList<Sprite>(0);
+        for (Ship ship : ships) {
+            Sprite sprite;
+            switch (ship.getType()) {
+                case WARSHIP:
+                    sprite = new Sprite(WarShipImg, 0, 0, 60, 60);
+                    break;
+                case CANONNSHIP:
+                    sprite = new Sprite(CanonShipImg, 0, 0, 60, 60);
+                    break;
+                case SUBMARINE:
+                    sprite = new Sprite(SubmarineImg, 0, 0, 60, 60);
+                    break;
+                case SUPPLYINGSHIP:
+                    sprite = new Sprite(SupplyingShipImg, 0, 0, 60, 60);
+                    break;
+                default:
+                    sprite = new Sprite(WarShipImg, 0, 0, 0, 0);
+                    break;
+            }
+            sprite.setPosition(ship.getPositionX(), ship.getPositionY());
+            if (ship.getMoveable() == false) {
+                sprite.setColor((149f / 256f), (149f / 256f), (149f / 256f), 1);//if sprite is no-moveable,set it gray
+            }
+            ret.add(sprite);
+        }
+        return ret;
+    }
+
+    //test this class
+    void Test() {
+        Player player = new Player(0,0);
+        Tile tile1 = new Tile(100,1);
+        Tile tile2 = new Tile(200,1);
+        Tile tile3 = new Tile(300,1);
+        Tile tile4 = new Tile(400,1);
+        Ship warShip1= new WarShip(tile1,player);
+        Ship supplyingShip1= new SupplyingShip(tile2,player);
+        Ship cannonShip1= new CannonShip(tile3,player);
+        Ship submarine1= new Submarine(tile4,player);
+        submarine1.setCanMoveNow(false);
+        this.ships = new ArrayList<Ship>(0);
+        this.ships.add(warShip1);
+        this.ships.add(supplyingShip1);
+        this.ships.add(cannonShip1);
+        this.ships.add(submarine1);
     }
 }

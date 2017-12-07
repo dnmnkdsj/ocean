@@ -3,6 +3,10 @@ package com.mygdx.game;
 import java.util.ArrayList;
 
 public class Ship {
+	enum Type {
+		WARSHIP,CANONNSHIP,SUBMARINE,SUPPLYINGSHIP
+	}
+
 	int maxHP = 100;
 	int nowHP = 100;
 	int atk = 100;
@@ -10,6 +14,10 @@ public class Ship {
 	int minAttackingRange = 1;
 	int maxAttackingRange = 5;//for testing
 	int movingRange = 5;
+	Type type;
+
+
+
 	//default attributes can be visited in son classes
 	
 	private Tile positionTile;
@@ -127,5 +135,18 @@ public class Ship {
 	}
 	public void setOwner(Player owner) {
 		this.owner = owner;
+	}
+
+	//交互接口
+	public Type getType(){
+		return type;}
+	public int getPositionX(){
+		return this.getPositionTile().getPositionX();
+	}
+	public int getPositionY(){
+		return this.getPositionTile().getPositionY();
+	}
+	public boolean getMoveable(){
+		return this.canMoveNow;
 	}
 }
