@@ -19,8 +19,8 @@ public class GameController {
 		Player player2 = new Player(10,10);
 		this.nowPlayer = player1;
 		this.nextPlayer = player2;	
-		this.players[1] = player1;
-		this.players[2] = player2;
+		this.players[0] = player1;
+		this.players[1] = player2;
 	}
 	public void initTiles() {
 		//TODO 初始化所有地图块。

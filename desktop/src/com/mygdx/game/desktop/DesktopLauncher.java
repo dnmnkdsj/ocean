@@ -13,17 +13,17 @@ import com.mygdx.game.Tile;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		//new LwjglApplication(new Ocean(), config);//测试期间暂时备注掉
+		new LwjglApplication(new Ocean(), config);//测试期间暂时备注掉
 	
 		//TEST:
 		
 		//初始化(测试版
-			GameController testGameController = new GameController();
-			testGameController.initGame();
-			Ship ship1 = testGameController.getNowPlayer().getShipBatch().get(0);//nowPlayer Warship
-			Ship ship2 = testGameController.getNowPlayer().getShipBatch().get(1);//nowPlayer CannonShip
-			Ship ship3 = testGameController.getNextPlayer().getShipBatch().get(0);//nextPlayer Submarine
-			Ship ship4 = testGameController.getNextPlayer().getShipBatch().get(1);//nextPlayer SupplyingShip
+//			GameController testGameController = new GameController();
+//			testGameController.initGame();
+//			Ship ship1 = testGameController.getNowPlayer().getShipBatch().get(0);//nowPlayer Warship
+//			Ship ship2 = testGameController.getNowPlayer().getShipBatch().get(1);//nowPlayer CannonShip
+//			Ship ship3 = testGameController.getNextPlayer().getShipBatch().get(0);//nextPlayer Submarine
+//			Ship ship4 = testGameController.getNextPlayer().getShipBatch().get(1);//nextPlayer SupplyingShip
 		
 
 //			//测试打印所有Tile
