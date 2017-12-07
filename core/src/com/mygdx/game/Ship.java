@@ -15,8 +15,7 @@ public class Ship {
 	int maxAttackingRange = 5;//for testing
 	int movingRange = 5;
 	Type type;
-
-
+	//todo is selected to complete
 
 	//default attributes can be visited in son classes
 	
@@ -73,6 +72,11 @@ public class Ship {
 	}
 	public void attackBack(Ship goalShip) {
 		goalShip.nowHP -= this.atk-goalShip.def;//TODO 计算公式待确认
+	}
+
+	//show whether this unit is selected
+	public boolean isSelected() {
+		return true;
 	}
 	
 	//setter&getter:
