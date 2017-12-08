@@ -81,13 +81,17 @@ public class Ship {
 
 	}
 	public void attack(int x ,int y ) {//交互重写
-		Ship goalShip = Ship.getShipAtXY(x, y);
+		Ship goalShip = Ship.getShipAtXY(x/60, y/60);
 		goalShip.nowHP -= this.atk-goalShip.def;//TODO 计算公式待确认
 		//判定反击:
 		int distance =Math.abs(goalShip.getPositionTile().getPositionX()-this.getPositionTile().getPositionX())
 				+ Math.abs(goalShip.getPositionTile().getPositionY()-this.getPositionTile().getPositionY());
 		if(distance > goalShip.getMaxAttackingRange() || distance < goalShip.minAttackingRange) {;}
 		else goalShip.attackBack(this);		
+
+        // Put Info to Console
+        System.out.println(this.nowHP);
+        System.out.println(goalShip.getNowHP());
 	}
 	public void attackBack(Ship goalShip) {
 		goalShip.nowHP -= this.atk-goalShip.def;//TODO 计算公式待确认

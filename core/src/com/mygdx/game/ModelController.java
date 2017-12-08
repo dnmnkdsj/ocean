@@ -5,7 +5,6 @@ public class ModelController{
 	private Player nowPlayer;
 	private Player nextPlayer;
 	
-	
 	public ModelController() {//按Player,Tile,Ship的顺序进行初始化。及根据关卡设置，相互绑定。
 		this.initPlayers();
 		//TODO 按照关卡，设置具体的整张地图，生成双方对应的Ships
@@ -46,7 +45,7 @@ public class ModelController{
 //			for (int i = 1; i < 4; i++) {
 //				this.nowPlayer.shipBatch.add(new WarShip(Tile.tileArray.get(i),this.nowPlayer));
 //			}
-		
+		    // TODO 初始化时只让第一个Player的Ship可移动
 			Ship ship1 = new WarShip(Tile.tileArray.get(0),this.nowPlayer);
 			this.nowPlayer.shipBatch.add(ship1);
 			Tile.tileArray.get(0).setShipAtThisTile(ship1);
@@ -55,15 +54,38 @@ public class ModelController{
 			this.nowPlayer.shipBatch.add(ship2);
 			Tile.tileArray.get(1).setShipAtThisTile(ship2);
 			
-			Ship ship3 = new Submarine(Tile.tileArray.get(2),this.nextPlayer);
-			this.nextPlayer.shipBatch.add(ship3);
+			Ship ship3 = new Submarine(Tile.tileArray.get(2),this.nowPlayer);
+			this.nowPlayer.shipBatch.add(ship3);
 			Tile.tileArray.get(2).setShipAtThisTile(ship3);
 
-			Ship ship4 = new SupplyingShip(Tile.tileArray.get(3),this.nextPlayer);
-			this.nextPlayer.shipBatch.add(ship4);
+			Ship ship4 = new SupplyingShip(Tile.tileArray.get(3),this.nowPlayer);
+			this.nowPlayer.shipBatch.add(ship4);
 			Tile.tileArray.get(3).setShipAtThisTile(ship4);
 		
+			Ship ship5 = new WarShip(Tile.tileArray.get(4),this.nextPlayer);
+			this.nextPlayer.shipBatch.add(ship5);
+			Tile.tileArray.get(4).setShipAtThisTile(ship5);
+			
+			Ship ship6 = new CannonShip(Tile.tileArray.get(5),this.nextPlayer);
+			this.nextPlayer.shipBatch.add(ship6);
+			Tile.tileArray.get(5).setShipAtThisTile(ship6);
+			
+			Ship ship7 = new Submarine(Tile.tileArray.get(6),this.nextPlayer);
+			this.nextPlayer.shipBatch.add(ship7);
+			Tile.tileArray.get(6).setShipAtThisTile(ship7);
+
+			Ship ship8 = new SupplyingShip(Tile.tileArray.get(7),this.nextPlayer);
+			this.nextPlayer.shipBatch.add(ship8);
+			Tile.tileArray.get(7).setShipAtThisTile(ship8);
+
+
 	}
+    public void resetMove(int roundNum){
+        for (Ship ship :  this.players[roundNum%2].getShipBatch()){
+            ship.setCanMoveNow(false);
+        }
+    }
+
 	public void switchPlayer() {
 		/*
 		Player temp = new Player();

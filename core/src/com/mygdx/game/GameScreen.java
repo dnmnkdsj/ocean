@@ -58,8 +58,7 @@ public class GameScreen extends ScreenAdapter {
         this.initShips();
         
         // Set Sprites
-        shipPaint = new ShipPainting();
-        shipPaint.sprites = shipPaint.createSprites(allShips);
+        shipPaint = new ShipPainting(allShips);
 
         // Set Event Process
 	    mouseClick = new MouseClick(this);
