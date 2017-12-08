@@ -52,5 +52,16 @@ public class Tile {
 
         return false;
     }
-	
+    //交互接口
+	public static Tile getTileAtXY(int x,int y) {//XY is in [tile coordinate system]
+		for(Tile t :Tile.tileArray) {
+			int x_t = t.getPositionX();
+			int y_t = t.getPositionY();
+			if( x_t == x && y_t == y ) {
+				return t;
+			}
+		}	
+		return null;
+	}
+
 }

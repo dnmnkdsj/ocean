@@ -41,7 +41,8 @@ public class Ship {
 			
 			reachableTiles.add(t);
 		}
-		
+		//System.out.println(reachableTiles.size());
+		//System.out.println(reachableTiles.get(0).getPositionY());
 		return reachableTiles;//返回可达Tiles的ArrayList
 	}
 	public void moveTo(Tile goalTile) {//移动至goalTile 
@@ -49,6 +50,12 @@ public class Ship {
 		goalTile.setShipAtThisTile(this);
 		
 	}//移动之后控制攻击，静止，占领的操作由controller负责
+	
+	public void moveTo(int x, int y) {//moveTo XY
+		Tile goalTile = Tile.getTileAtXY(x, y);
+		this.setPositionTile(goalTile);
+		goalTile.setShipAtThisTile(this);
+	}	
 	
 	public ArrayList<Ship> showAttackableShips() {
 		ArrayList<Ship> attackableShips = new ArrayList<Ship>();
@@ -70,8 +77,17 @@ public class Ship {
 		int distance =Math.abs(goalShip.getPositionTile().getPositionX()-this.getPositionTile().getPositionX())
 				+ Math.abs(goalShip.getPositionTile().getPositionY()-this.getPositionTile().getPositionY());
 		if(distance > goalShip.getMaxAttackingRange() || distance < goalShip.minAttackingRange) {;}
-		else goalShip.attackBack(this);
-		
+		else goalShip.attackBack(this);		
+
+	}
+	public void attack(int x ,int y ) {//交互重写
+		Ship goalShip = Ship.getShipAtXY(x, y);
+		goalShip.nowHP -= this.atk-goalShip.def;//TODO 计算公式待确认
+		//判定反击:
+		int distance =Math.abs(goalShip.getPositionTile().getPositionX()-this.getPositionTile().getPositionX())
+				+ Math.abs(goalShip.getPositionTile().getPositionY()-this.getPositionTile().getPositionY());
+		if(distance > goalShip.getMaxAttackingRange() || distance < goalShip.minAttackingRange) {;}
+		else goalShip.attackBack(this);		
 	}
 	public void attackBack(Ship goalShip) {
 		goalShip.nowHP -= this.atk-goalShip.def;//TODO 计算公式待确认
@@ -147,7 +163,8 @@ public class Ship {
 
 	//交互接口
 	public Type getType(){
-		return type;}
+		return type;
+	}
 	public int getPositionX(){
 		return this.getPositionTile().getPositionX();
 	}
@@ -156,5 +173,50 @@ public class Ship {
 	}
 	public boolean getMoveable(){
 		return this.canMoveNow;
+	}
+	
+		//12.8 15:24 
+	public static Ship getShipAtXY(int x,int y) {//XY is in [tile coordinate system]
+		for(Tile t :Tile.tileArray) {
+            if (t.getShipAtThisTile() == null)  continue;
+			int x_t = t.getShipAtThisTile().getPositionX();
+			int y_t = t.getShipAtThisTile().getPositionY();
+			if( x_t == x && y_t == y ) {
+				return t.getShipAtThisTile();
+			}
+		}	
+		return null;
+	}
+
+	public static Ship getClickShip(int x,int y) {		
+		return Ship.getShipAtXY(x/60,y/60);//if no ship at XY,return null
+	}
+	
+	public boolean isReachable(int x , int y) {
+		Tile tileAtXY = Tile.getTileAtXY(x/60, y/60);
+		if(this.showReachableTiles().contains(tileAtXY)) return true ;
+        else return false;
+
+            
+                
+//      for(Tile t : this.showReachableTiles()) {
+//			if( t == tileAtXY ) return true;
+//		}
+//		return false;
+
+    }
+	public boolean isAttackable(int x,int y) {
+		Ship shipAtXY = Ship.getShipAtXY(x, y);
+		if ( null == shipAtXY ) return false;
+		for(Ship s : this.showAttackableShips()) {
+			if( s == shipAtXY ) return true;
+		}
+		return false;
+	}
+
+	public boolean isClickingItself(int x ,int y) {
+		Ship shipAtXY = Ship.getClickShip(x, y);
+		if(this == shipAtXY) return true ;
+		else return false;
 	}
 }

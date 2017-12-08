@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.*;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,13 @@ public class ShipPainting {
 
 
     void paint() {
+        // Set newest position
+        /*for (Sprite sprite : sprites) {
+            sprite.setPosition(ship.getPositionX() * 60, ship.getPositionY()* 60); // Based on tile coordinate
+            if (ship.getMoveable() == false) {
+                sprite.setColor((149f / 256f), (149f / 256f), (149f / 256f), 1);//if sprite is no-moveable,set it gray
+            }
+        }*/
         batch.begin();
         for (Sprite sprite : this.sprites) {
             sprite.draw(batch);

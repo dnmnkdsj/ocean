@@ -29,11 +29,13 @@ public class GameScreen extends ScreenAdapter {
     private ShipPainting shipPaint;
 
     private ModelController modleControlller;
+    private MouseClick mouseClick;
 
     private ArrayList<Ship> allShips = new ArrayList<Ship> ();
 
     boolean isOver = false;
-    boolean 
+    int currentTurn = 0;
+    public Ship currentShip = null;
 
     public GameScreen() {
         this.batch = new SpriteBatch();
@@ -46,7 +48,7 @@ public class GameScreen extends ScreenAdapter {
         // Set Tiled Map
         tiledMap = new TmxMapLoader().load("tiledMap/example.tmx");
         colorLayer = (TiledMapTileLayer)tiledMap.getLayers().get("Color");
-        colorTile = tiledMap.getTileSets().getTileSet("Color_Set").getTile(0);
+        colorTile = tiledMap.getTileSets().getTileSet("Color_Set").getTile(1);
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         tiledMapRenderer.setView(camera);
@@ -59,9 +61,9 @@ public class GameScreen extends ScreenAdapter {
         shipPaint = new ShipPainting();
         shipPaint.sprites = shipPaint.createSprites(allShips);
 
-	//	= new InputProcessorEvent();
-
-	//	Gdx.input.setInputProcessor(processorEvent);
+        // Set Event Process
+	    mouseClick = new MouseClick(this);
+		Gdx.input.setInputProcessor(mouseClick);
 
     }
 
@@ -82,20 +84,6 @@ public class GameScreen extends ScreenAdapter {
 		this.batch.end();
     }
 
-    public void showRegion (int[][] table, int length) {
-        for (int i = 0; i< length; i++) {
-            cell = colorLayer.getCell(table[i][0], table[i][1]);
-            cell.setTile(colorTile);
-        }
-    }
-
-    public void removeRegion (int[][] table, int length) {
-        for (int i = 0 ; i < length; i++) {
-            if(colorLayer.getCell(table[i][0], table[i][1]) != null) {
-                colorLayer.getCell(table[i][0], table[i][1]).setTile(null);
-            }
-        }
-    }
 
     public void initShips () {
         if(modleControlller.getNowPlayer().getShipBatch()== null)
@@ -105,6 +93,23 @@ public class GameScreen extends ScreenAdapter {
         }
         for(Ship ship: modleControlller.getNextPlayer().getShipBatch()) {
             allShips.add(ship);
+        }
+    }
+
+    public void showRegion (ArrayList<Tile> tiles) {
+        for (Tile tile : tiles) {
+            cell = colorLayer.getCell(tile.getPositionX(), tile.getPositionY());
+            if (cell == null ){  System.out.println(tile.getPositionX());
+                                System.out.println(tile.getPositionY());}
+            cell.setTile(colorTile);
+        }
+    }
+
+    public void removeRegion (ArrayList<Tile> tiles) {
+        for (Tile tile : tiles) {
+            if(colorLayer.getCell(tile.getPositionX(), tile.getPositionY()) != null) {
+                colorLayer.getCell(tile.getPositionX(), tile.getPositionY()).setTile(null);
+            }
         }
     }
 

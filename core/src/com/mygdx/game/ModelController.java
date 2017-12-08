@@ -31,8 +31,9 @@ public class ModelController{
 		 *对于Harbour,island等自带属性的地形，还需初始化其属性
 		 * */
 			//(以下新建的Tiles为测试用)
-			for (int i = 0; i < 15; i++) {
-				Tile.tileArray.add(new DeepSea(i,i));
+			for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 12; j++)
+				    Tile.tileArray.add(new DeepSea(i,j));
 			}
 	}
 	public void initShips() {

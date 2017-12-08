@@ -27,6 +27,9 @@
  <tileset firstgid="25" name="深海3" tilewidth="60" tileheight="60" tilecount="1">
   <image source="深海3.png" trans="003039" width="60" height="60"/>
  </tileset>
+ <tileset firstgid="26" name="grass-tiles-2-small" tilewidth="32" tileheight="32" tilecount="72">
+  <image source="grass-tiles-2-small.png" width="384" height="192"/>
+ </tileset>
  <layer name="块层 1" width="20" height="12">
   <data encoding="base64" compression="zlib">
    eJyFkkEOACEIA4mgf/D/H90LJJOK7oGICKVUwswibcMv88t9wN+wEDyXOkeuC07hvvAqfzV4I2Mr/WEnPzX2ddTRH01O4KzYRH752o9vkb4Ljs5MrXbWTOCxj/6NclWt/vDIR7GK+2vesF4X3TNiq96M3+a5/S13Qvcl8Ma5O/017nbuf8dzNye19cZUE+XD+wd8/QhK
@@ -37,9 +40,9 @@
    eJztzLsRgCAUBdGXgYAiH5H+K2U7ILkhO3PSdWbmcZmmgIgk+t14kEW/02nXi4Iq+jV0fKLfwI+JBYkDARg=
   </data>
  </layer>
- <layer name="Color" width="20" height="12" opacity="0.47">
+ <layer name="Color" width="20" height="12" opacity="0.72">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDFUAAAPAAAE=
+   eJyzYWBgsBnFo3gUD0kMAPJnOEE=
   </data>
  </layer>
 </map>
