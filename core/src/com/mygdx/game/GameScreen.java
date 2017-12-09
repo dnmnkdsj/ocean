@@ -37,7 +37,7 @@ public class GameScreen extends ScreenAdapter {
 
     private ArrayList<Ship> allShips = new ArrayList<Ship> ();
 
-    boolean isOver = true;
+    boolean isOver = false;
     int currentTurn = 0;
     public Ship currentShip = null;
 
