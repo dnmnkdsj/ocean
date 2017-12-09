@@ -53,53 +53,47 @@ public class ModelController{
 
 	}
 	public void initShips() {
-		//TODO 初始化所有船只
-		/*需实例化Ship对象，并add到对应Player.shipBatch中，同时绑定到对应Tile.ShipAtThisTile上。
-		 * 具体Ship数量、所有权、位置分布是与关卡设置有关
-		 * */
-			//(以下新建的Ships为测试用)
-			
-//			for (int i = 1; i < 4; i++) {
-//				this.nowPlayer.shipBatch.add(new WarShip(Tile.tileArray.get(i),this.nowPlayer));
-//			}
-		    // TODO 初始化时只让第一个Player的Ship可移动
-			Ship ship1 = new WarShip(Tile.tileArray.get(0),this.nowPlayer);
+
+			Ship ship1 = new WarShip(Tile.getTileAtXY(0,8),this.nowPlayer);
 			this.nowPlayer.shipBatch.add(ship1);
-			Tile.tileArray.get(0).setShipAtThisTile(ship1);
+			Tile.getTileAtXY(0,8).setShipAtThisTile(ship1);
 			
-			Ship ship2 = new CannonShip(Tile.tileArray.get(1),this.nowPlayer);
+			Ship ship2 = new CannonShip(Tile.getTileAtXY(1,8),this.nowPlayer);
 			this.nowPlayer.shipBatch.add(ship2);
-			Tile.tileArray.get(1).setShipAtThisTile(ship2);
+			Tile.getTileAtXY(1,8).setShipAtThisTile(ship2);
 			
-			Ship ship3 = new Submarine(Tile.tileArray.get(2),this.nowPlayer);
+			Ship ship3 = new Submarine(Tile.getTileAtXY(2,8),this.nowPlayer);
 			this.nowPlayer.shipBatch.add(ship3);
-			Tile.tileArray.get(2).setShipAtThisTile(ship3);
+			Tile.getTileAtXY(2,8).setShipAtThisTile(ship3);
 
-			Ship ship4 = new SupplyingShip(Tile.tileArray.get(3),this.nowPlayer);
+			Ship ship4 = new SupplyingShip(Tile.getTileAtXY(3,8),this.nowPlayer);
 			this.nowPlayer.shipBatch.add(ship4);
-			Tile.tileArray.get(3).setShipAtThisTile(ship4);
+			Tile.getTileAtXY(3,8).setShipAtThisTile(ship4);
 		
-			Ship ship5 = new WarShip(Tile.tileArray.get(4),this.nextPlayer);
+			Ship ship5 = new WarShip(Tile.getTileAtXY(16,3),this.nextPlayer);
 			this.nextPlayer.shipBatch.add(ship5);
-			Tile.tileArray.get(4).setShipAtThisTile(ship5);
+			Tile.getTileAtXY(16,3).setShipAtThisTile(ship5);
 			
-			Ship ship6 = new CannonShip(Tile.tileArray.get(5),this.nextPlayer);
+			Ship ship6 = new CannonShip(Tile.getTileAtXY(17,3),this.nextPlayer);
 			this.nextPlayer.shipBatch.add(ship6);
-			Tile.tileArray.get(5).setShipAtThisTile(ship6);
+			Tile.getTileAtXY(17,3).setShipAtThisTile(ship6);
 			
-			Ship ship7 = new Submarine(Tile.tileArray.get(6),this.nextPlayer);
+			Ship ship7 = new Submarine(Tile.getTileAtXY(18,3),this.nextPlayer);
 			this.nextPlayer.shipBatch.add(ship7);
-			Tile.tileArray.get(6).setShipAtThisTile(ship7);
+			Tile.getTileAtXY(18,3).setShipAtThisTile(ship7);
 
-			Ship ship8 = new SupplyingShip(Tile.tileArray.get(7),this.nextPlayer);
+			Ship ship8 = new SupplyingShip(Tile.getTileAtXY(19,3),this.nextPlayer);
 			this.nextPlayer.shipBatch.add(ship8);
-			Tile.tileArray.get(7).setShipAtThisTile(ship8);
+			Tile.getTileAtXY(19,3).setShipAtThisTile(ship8);
 
 
 	}
     public void resetMove(int roundNum){
         for (Ship ship :  this.players[roundNum%2].getShipBatch()){
             ship.setCanMoveNow(false);
+        }
+        for (Ship ship :  this.players[roundNum%2+1].getShipBatch()){
+            ship.setCanMoveNow(true);
         }
     }
 
@@ -112,8 +106,10 @@ public class ModelController{
 		 */
 	}
 	public boolean isEnd() {//返回布尔值.如果nextPlayer的港口被占则为true。
-		if(this.nextPlayer.getHarbourOfThisPlayer().getIsDestroyed())	return true;
-		else return false;
+		//if(this.players[].getHarbourOfThisPlayer().getIsDestroyed())	return true;
+		if(0 == this.players[0].shipBatch.size()) return true;
+		return false;
+		
 	}
 	public void removeShip(Ship p) {//移除(死亡的)Ship，并结算给对方金钱
 		//TODO 

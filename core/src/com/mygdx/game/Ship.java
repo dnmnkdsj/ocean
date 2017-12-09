@@ -165,6 +165,13 @@ public class Ship {
         return this.isSelected;
     }
 
+    public void die() {
+    	
+    	int index = this.owner.shipBatch.indexOf(this);
+    	this.owner.shipBatch.remove(index);
+    	
+    }
+    
 	//交互接口
 	public Type getType(){
 		return type;
@@ -202,12 +209,7 @@ public class Ship {
         else return false;
 
             
-                
-//      for(Tile t : this.showReachableTiles()) {
-//			if( t == tileAtXY ) return true;
-//		}
-//		return false;
-
+ 
     }
 	public boolean isAttackable(int x,int y) {
 		Ship shipAtXY = Ship.getShipAtXY(x, y);
