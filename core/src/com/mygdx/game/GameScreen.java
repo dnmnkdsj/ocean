@@ -37,7 +37,7 @@ public class GameScreen extends ScreenAdapter {
 
     private ArrayList<Ship> allShips = new ArrayList<Ship> ();
 
-    boolean isOver = false;
+    boolean isOver = true;
     int currentTurn = 0;
     public Ship currentShip = null;
 
@@ -87,14 +87,18 @@ public class GameScreen extends ScreenAdapter {
 
         // Render Sprites
         shipPaint.paint();
-
-        this.batch.begin();
-        //this.batch.draw(img, (float)50, (float)50);
-        this.batch.end();
-
+        
         // Stage
         uiStage.act();
         uiStage.draw();
+
+        this.batch.begin();
+        if (isOver) {
+            System.out.println("Game Over!!!");
+            batch.draw(new Texture("game over.png"), 0, 0);
+        }
+        //this.batch.draw(img, (float)50, (float)50);
+        this.batch.end();
     }
 
 
@@ -145,6 +149,20 @@ public class GameScreen extends ScreenAdapter {
      */
     public void setUiStage(Stage uiStage) {
         this.uiStage = uiStage;
+    }
+
+    /**
+     * @return the isOver
+     */
+    public boolean isOver() {
+        return isOver;
+    }
+
+    /**
+     * @param isOver the isOver to set
+     */
+    public void setOver(boolean isOver) {
+        this.isOver = isOver;
     }
        
 }
