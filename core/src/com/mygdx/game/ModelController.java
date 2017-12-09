@@ -92,7 +92,7 @@ public class ModelController{
         for (Ship ship :  this.players[roundNum%2].getShipBatch()){
             ship.setCanMoveNow(false);
         }
-        for (Ship ship :  this.players[roundNum%2+1].getShipBatch()){
+        for (Ship ship :  this.players[(roundNum+1)%2].getShipBatch()){
             ship.setCanMoveNow(true);
         }
     }
