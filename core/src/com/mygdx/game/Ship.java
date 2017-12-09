@@ -73,12 +73,18 @@ public class Ship {
 
 	public void attack(Ship goalShip) {
 		goalShip.nowHP -= this.atk-goalShip.def;//TODO 计算公式待确认
+		//TODO 攻击死亡判定
+		if( 0 >= goalShip.nowHP ) {
+			goalShip.die();
+			System.out.println("Die of Attacking");
+		}
+		
 		//判定反击:
 		int distance =Math.abs(goalShip.getPositionTile().getPositionX()-this.getPositionTile().getPositionX())
 				+ Math.abs(goalShip.getPositionTile().getPositionY()-this.getPositionTile().getPositionY());
 		if(distance > goalShip.getMaxAttackingRange() || distance < goalShip.minAttackingRange) {;}
 		else goalShip.attackBack(this);		
-
+		
 	}
 	public void attack(int x ,int y ) {//交互重写
 		Ship goalShip = Ship.getShipAtXY(x/60, y/60);
@@ -88,13 +94,20 @@ public class Ship {
 				+ Math.abs(goalShip.getPositionTile().getPositionY()-this.getPositionTile().getPositionY());
 		if(distance > goalShip.getMaxAttackingRange() || distance < goalShip.minAttackingRange) {;}
 		else goalShip.attackBack(this);		
-
+		
+		
         // Put Info to Console
         System.out.println(this.nowHP);
         System.out.println(goalShip.getNowHP());
 	}
 	public void attackBack(Ship goalShip) {
 		goalShip.nowHP -= this.atk-goalShip.def;//TODO 计算公式待确认
+		//TODO 死亡判定
+		if( 0 >= goalShip.nowHP ) {
+			goalShip.die();
+			System.out.println("Die of attacking back");
+		}
+
 	}
 	
 	//setter&getter:
