@@ -41,6 +41,10 @@ public class ShipPainting {
             showInformation(ship);
         }
         batch.end();
+        for (Sprite sprite : this.sprites) {
+            sprite = null;
+        }
+        System.gc();
     }
 
     void dispose() {

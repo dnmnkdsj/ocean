@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.util.ArrayList;
 
@@ -31,6 +33,8 @@ public class GameScreen extends ScreenAdapter {
     private ModelController modleControlller;
     private MouseClick mouseClick;
 
+    private Stage uiStage;
+
     private ArrayList<Ship> allShips = new ArrayList<Ship> ();
 
     boolean isOver = false;
@@ -55,22 +59,28 @@ public class GameScreen extends ScreenAdapter {
 
         // Init Model
         modleControlller = new ModelController();
+        modleControlller.resetMove(currentTurn);
         this.initShips();
         
         // Set Sprites
         shipPaint = new ShipPainting(allShips);
 
+        // Set uiStage
+        uiStage = new Stage();
+        new HUD(this);
+
         // Set Event Process
-	    mouseClick = new MouseClick(this);
-		Gdx.input.setInputProcessor(mouseClick);
+        mouseClick = new MouseClick(this);
+        InputMultiplexer inputProcess = new InputMultiplexer(uiStage, mouseClick);
+        Gdx.input.setInputProcessor(inputProcess);
 
     }
 
     
     @Override
     public void render (float delta) {
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
 
         tiledMapRenderer.render();
@@ -78,9 +88,13 @@ public class GameScreen extends ScreenAdapter {
         // Render Sprites
         shipPaint.paint();
 
-		this.batch.begin();
-		//this.batch.draw(img, (float)50, (float)50);
-		this.batch.end();
+        this.batch.begin();
+        //this.batch.draw(img, (float)50, (float)50);
+        this.batch.end();
+
+        // Stage
+        uiStage.act();
+        uiStage.draw();
     }
 
 
@@ -112,6 +126,26 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    /**
+     * @return the modleControlller
+     */
+    public ModelController getModleControlller() {
+        return modleControlller;
+    }
+
+    /**
+     * @return the uiStage
+     */
+    public Stage getUiStage() {
+        return uiStage;
+    }
+
+    /**
+     * @param uiStage the uiStage to set
+     */
+    public void setUiStage(Stage uiStage) {
+        this.uiStage = uiStage;
+    }
        
 }
 
