@@ -32,6 +32,7 @@ public class ShipPainting {
                 sprite.setColor((149f / 256f), (149f / 256f), (149f / 256f), 1);//if sprite is no-moveable,set it gray
             }
         }*/
+        System.gc();
         this.sprites = updateSprites(ships);
         batch.begin();
         for (Sprite sprite : this.sprites) {
@@ -83,6 +84,7 @@ public class ShipPainting {
             }
             ret.add(sprite);
         }
+        System.gc();
         return ret;
     }
 
