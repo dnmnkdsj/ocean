@@ -37,7 +37,7 @@ public class Ship {
 			
 			if( distance > this.getMovingRange()) continue;//1.移动力可达
 			if( null != t.getShipAtThisTile()) continue;//2.无其他单位所在
-			if( false ) continue;//TODO 3.判断地形对船种的可达性.
+			if( t.getClass().getSimpleName().equals("Reef") ) continue;//TODO 3.判断地形对船种的可达性.
 			
 			reachableTiles.add(t);
 		}

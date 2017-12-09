@@ -31,9 +31,26 @@ public class ModelController{
 		 * */
 			//(以下新建的Tiles为测试用)
 			for (int i = 0; i < 20; i++) {
-                for (int j = 0; j < 12; j++)
-				    Tile.tileArray.add(new DeepSea(i,j));
+                for (int j = 0; j < 12; j++) {
+                	
+	                if( i == 3 && j == 4 ) {Tile.tileArray.add(new Reef(i,j));continue;}
+	                if( i == 3 && j == 7 ) {Tile.tileArray.add(new Reef(i,j));continue;}
+	                if( i == 6 && j == 4 ) {Tile.tileArray.add(new Reef(i,j));continue;}
+	                if( i == 6 && j == 7 ) {Tile.tileArray.add(new Reef(i,j));continue;}
+	                if( i == 16 && j == 4 ) {Tile.tileArray.add(new Reef(i,j));continue;}
+	                if( i == 16 && j == 7 ) {Tile.tileArray.add(new Reef(i,j));continue;}
+	                if( i == 13 && j == 4 ) {Tile.tileArray.add(new Reef(i,j));continue;}
+	                if( i == 13 && j == 7 ) {Tile.tileArray.add(new Reef(i,j));continue;}
+	                
+	                Tile.tileArray.add(new DeepSea(i,j));
+			
+                }
 			}
+			//3,4;3,7;6,4;6,7;16,4;16,7;13,4;13,7;  
+			for(Tile t : Tile.tileArray) {
+				System.out.println(t.getClass());
+			}
+
 	}
 	public void initShips() {
 		//TODO 初始化所有船只
