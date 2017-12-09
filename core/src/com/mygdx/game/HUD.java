@@ -1,22 +1,26 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 
 public class HUD extends Actor {
     private GameScreen game;
     public HUD (GameScreen game) {
         this.game = game;
-        TextButtonStyle textButtonStyle = new TextButtonStyle();
-        textButtonStyle.font = new BitmapFont();
-        TextButton nextTurnButton = new TextButton("Next Turn", textButtonStyle);
-        nextTurnButton.setPosition(800, 10);
+        //TextButtonStyle ButtonStyle = new ButtonStyle();
+        //textButtonStyle.font = new BitmapFont();
+        ImageButton nextTurnButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("下一回合.png"))));
+        nextTurnButton.setPosition(1140, 660);
         nextTurnButton.addListener(
             new InputListener()  {
                 @Override

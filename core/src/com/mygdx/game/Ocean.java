@@ -12,7 +12,7 @@ public class Ocean extends Game{
 	@Override
 	public void create () {
 		//batch = new SpriteBatch();
-        this.setScreen(new GameScreen());
+        this.setScreen(new Welcome(this));
 	}
 
 	@Override

@@ -18,20 +18,15 @@ public class Welcome extends ScreenAdapter {
 	Texture img;
     OrthographicCamera camera;
     TiledMapRenderer tiledMapRenderer;
+    private Ocean ocean;
 
-    public Welcome() {
+    public Welcome(final Ocean ocean) {
+        this.ocean = ocean;
         this.batch = new SpriteBatch();
-		this.img = new Texture("badlogic.jpg");
+		this.img = new Texture("badlogic.png");
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1024, 768);
+        camera.setToOrtho(false, 1200, 720);
         camera.update();
-        tiledMap = new TmxMapLoader().load("tiledMap/example.tmx");
-        TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get("Color");
-        TiledMapTileLayer.Cell cell = layer.getCell(0, 0);
-        
-        TiledMapTileSets tilesets = tiledMap.getTileSets();
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-        cell.setTile(tilesets.getTileSet("Color_Set").getTile(1));
         //if(tilesets.getTileSet("Color_Set").getTile(17) == null || cell == null)
         //    System.out.println("Empty!!!");
         //cell.setTile(tilesets.getTile(73));
@@ -43,11 +38,13 @@ public class Welcome extends ScreenAdapter {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
-        tiledMapRenderer.setView(camera);
-        tiledMapRenderer.render();
 		this.batch.begin();
-		this.batch.draw(img, (float)50, (float)50);
+		this.batch.draw(img, (float)00, (float)00);
 		this.batch.end();
+        if (Gdx.input.isTouched()) {
+            ocean.setScreen(new GameScreen());
+            dispose();
+        }
     }
 
 }
