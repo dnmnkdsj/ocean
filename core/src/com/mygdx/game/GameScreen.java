@@ -86,6 +86,7 @@ public class GameScreen extends ScreenAdapter {
         tiledMapRenderer.render();
 
         // Render Sprites
+        shipPaint = new ShipPainting(allShips);
         shipPaint.paint();
         
         // Stage
@@ -103,6 +104,7 @@ public class GameScreen extends ScreenAdapter {
 
 
     public void initShips () {
+        allShips.clear();
         if(modleControlller.getNowPlayer().getShipBatch()== null)
             System.out.println("Null Point");
         for(Ship ship: modleControlller.getNowPlayer().getShipBatch()) {
