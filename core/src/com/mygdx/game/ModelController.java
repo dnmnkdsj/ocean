@@ -108,6 +108,7 @@ public class ModelController{
 	public boolean isEnd() {//返回布尔值.如果nextPlayer的港口被占则为true。
 		//if(this.players[].getHarbourOfThisPlayer().getIsDestroyed())	return true;
 		if(0 == this.players[0].shipBatch.size()) return true;
+		if(0 == this.players[1].shipBatch.size()) return true;
 		return false;
 		
 	}
